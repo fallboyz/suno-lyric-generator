@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suno Lyric Generator | Premium AI Music Tool</title>
+    <meta name="description"
+        content="Generate high-quality lyrics and style prompts optimized for Suno AI (V3.5 & V4/V5).">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+    <div id="toast-container"></div>
+
+    <header class="premium-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="Suno Logo">
+                </div>
+                <h1>Suno Lyric Generator</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <div class="main-grid">
+            <!-- Left Column: Editor -->
+            <section class="editor-section">
+                <div class="section-header">
+                    <h2>Lyrical Editor</h2>
+                    <div class="verified-notice-bar">
+                        <span class="pulse-icon"></span>
+                        글로벌 Suno 커뮤니티의 검증된 태그와 최신 기법들을 총망라하여 구축되었습니다. (기준일: 2026.01)
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <textarea id="lyric-editor" placeholder="여기에 가사를 입력하거나 템플릿을 선택하세요..."></textarea>
+                    <div class="editor-footer">
+                        <button id="copy-lyric-btn" class="primary-btn">가사 복사</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Tools & Reference -->
+            <div class="sidebar-content">
+                <section class="style-section">
+                    <div class="section-header">
+                        <h2>Style Builder</h2>
+                    </div>
+                    <div class="style-input-group">
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label>Style Prompt</label>
+                                <input type="text" id="style-input" placeholder="장르, 무드 등...">
+                            </div>
+                            <button id="copy-style-btn" class="primary-btn copy-btn">복사</button>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-field">
+                                <label>Exclude Styles</label>
+                                <input type="text" id="exclude-input" placeholder="제외 필터...">
+                            </div>
+                            <button id="copy-exclude-btn" class="primary-btn copy-btn">복사</button>
+                        </div>
+                    </div>
+                    <div id="style-tags" class="quick-tags" style="margin-top: 1.5rem;">
+                        <!-- Data driven tags will be here -->
+                    </div>
+                </section>
+
+                <section class="reference-section">
+                    <nav class="ref-tabs">
+                        <button class="tab-btn active" data-tab="tags">Tags</button>
+                        <button class="tab-btn" data-tab="tips">Tips</button>
+                        <button class="tab-btn" data-tab="templates">Templates</button>
+                    </nav>
+                    <div id="ref-content" class="ref-container">
+                        <!-- Content will be injected by JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Custom Modal for Template Confirmation -->
+    <div id="custom-confirm-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon">⚠️</div>
+            <h3>내용 덮어쓰기 확인</h3>
+            <p>현재 작성 중인 가사를 지우고 선택한 <span id="modal-template-name"
+                    style="color: var(--primary-accent); font-weight: 700;"></span> 템플릿을 적용하시겠습니까?</p>
+            <div class="modal-actions">
+                <button id="modal-cancel-btn" class="secondary-btn">취소</button>
+                <button id="modal-confirm-btn" class="primary-btn">템플릿 적용</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="premium-footer">
+        <p>&copy; 2026 Suno Lyric Generator. Developed by <strong>Coulson</strong>. All rights reserved.</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
