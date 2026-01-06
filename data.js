@@ -67,7 +67,7 @@ const SUNO_DATA = {
                 { tag: "Distance: Far", desc: "원근감 (멀리)", detail: "보컬이나 악기가 멀리서 들리는 듯한 공간적 원근감을 연출합니다." },
                 { tag: "Distorted", desc: "왜곡 효과", detail: "의도적으로 소리를 깨뜨려 거칠고 강렬한 록/인더스트리얼 느낌을 줍니다." },
                 { tag: "Wide Stereo", desc: "넓은 입체감", detail: "좌우 스피커를 가득 채우는 웅장한 입체 사운드를 유도합니다." },
-                { tag: "High Fidelity", desc: "고음질 추구", detail: "튜디오에서 녹음한 듯한 깨끗하고 선명한 사운드 퀄리티를 지향합니다." },
+                { tag: "High Fidelity", desc: "고음질 추구", detail: "스튜디오에서 녹음한 듯한 깨끗하고 선명한 사운드 퀄리티를 지향합니다." },
                 { tag: "Analog Saturation", desc: "따뜻한 질감", detail: "아날로그 장비를 통과한 듯한 따뜻하고 부드러운 왜곡을 줍니다." },
                 { tag: "Tape Hiss", desc: "빈티지 노이즈", detail: "카세트 테이프 특유의 배경 노이즈를 넣어 빈티지함을 더합니다." }
             ]
