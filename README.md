@@ -30,6 +30,13 @@ This project is a static web page that runs directly in your browser with no ins
 2. Open the `index.html` file in your browser.
 3. Write your lyrics, apply tags, and design your music styles using the available tools.
 
+## ⚙️ Configuration
+
+For monetization, this project uses Google AdSense. 
+- Create an `ads-config.js` file in the root directory.
+- Add your AdSense client and slot IDs (see `ads-config.js.example` or implementation in `main.js`).
+- Note: `ads-config.js` is ignored by Git by default to protect your AdSense IDs.
+
 ## 📄 License
 
 This project is licensed under the **MIT License**.  
@@ -70,6 +77,13 @@ You are free to use, modify, and distribute it.
 1. 이 저장소를 클론하거나 다운로드합니다.
 2. `index.html` 파일을 브라우저로 엽니다.
 3. 가사를 작성하고 다양한 도구를 활용하여 자신만의 음악을 설계합니다.
+
+## ⚙️ 설정 가이드
+
+수익화를 위해 Google AdSense가 통합되어 있습니다. 
+- 루트 디렉토리에 `ads-config.js` 파일을 생성합니다.
+- 본인의 AdSense 클라이언트 ID와 슬롯 ID를 설정합니다 (`main.js` 및 `index.html` 로직 참고).
+- 주의: 본인의 AdSense 정보를 보호하기 위해 `ads-config.js` 파일은 기본적으로 Git 추적에서 제외(`gitignore`)되어 있습니다.
 
 ## 📄 라이선스
 

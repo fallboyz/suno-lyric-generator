@@ -735,3 +735,27 @@ h2 {
         line-height: 1.5;
     }
 }
+
+/* 중앙 광고 영역 스타일 (AdSense) */
+.main-ad-area {
+    margin: 1.5rem 0 0.5rem 0;
+    padding: 0;
+    display: none;
+    /* 기본적으로 숨김 (설정이 있을 때만 표시) */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-height: 90px;
+    background: transparent;
+    border: none;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .main-ad-area {
+        margin: 1rem 0 0.5rem 0;
+        min-height: 50px;
+        /* 모바일에서는 높이 축소 */
+    }
+}

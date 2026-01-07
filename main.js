@@ -253,4 +253,35 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltip.style.opacity = '0';
         tooltipTimer = setTimeout(() => tooltip.style.display = 'none', 200);
     }
+
+    // --- AdSense Logic ---
+    function initAdSense() {
+        if (typeof ADSENSE_CONFIG !== 'undefined') {
+            const container = document.getElementById('main-ad-container');
+            if (!container) return;
+
+            // 앱 렌더링이 끝난 후 약간의 지연을 두어 자연스럽게 표시
+            setTimeout(() => {
+                container.style.display = 'flex';
+                const ins = document.createElement('ins');
+                ins.className = "adsbygoogle";
+                ins.style.display = "block";
+                ins.style.width = "100%";
+                ins.setAttribute('data-ad-client', ADSENSE_CONFIG.client);
+                ins.setAttribute('data-ad-slot', ADSENSE_CONFIG.slot);
+                ins.setAttribute('data-ad-format', 'auto');
+                ins.setAttribute('data-full-width-responsive', 'true');
+
+                container.appendChild(ins);
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (e) {
+                    console.error("AdSense push error:", e);
+                }
+            }, 500); // 0.5초 지연
+        }
+    }
+
+    // Initialize AdSense
+    initAdSense();
 });
