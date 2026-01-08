@@ -764,7 +764,7 @@ h2 {
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
-    min-height: 90px;
+    /* min-height 제거: 광고가 로드될 때만 영역을 차지하도록 함 */
     background: transparent;
     border: none;
     width: 100%;
@@ -773,7 +773,6 @@ h2 {
 @media (max-width: 768px) {
     .main-ad-area {
         margin: 0.5rem 0;
-        min-height: 50px;
         /* 모바일에서는 높이 축소 */
     }
 }

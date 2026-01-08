@@ -232,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 앱 렌더링이 끝난 후 약간의 지연을 두어 자연스럽게 표시
             setTimeout(() => {
-                container.style.display = 'flex';
                 const ins = document.createElement('ins');
                 ins.className = "adsbygoogle";
                 ins.style.display = "block";
@@ -243,12 +242,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 ins.setAttribute('data-full-width-responsive', 'true');
 
                 container.appendChild(ins);
+
                 try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+
+                    // 광고 로드 완료 후 실제로 내용이 채워졌는지 확인 (최대 2초 대기)
+                    let checkCount = 0;
+                    const checkInterval = setInterval(() => {
+                        if (ins.clientHeight > 0) {
+                            container.style.display = 'flex';
+                            clearInterval(checkInterval);
+                        }
+                        checkCount++;
+                        if (checkCount > 20) { // 2초 후에도 높이가 없으면 차단된 것으로 간주
+                            clearInterval(checkInterval);
+                            container.style.display = 'none';
+                        }
+                    }, 100);
                 } catch (e) {
                     console.error("AdSense push error:", e);
+                    container.style.display = 'none';
                 }
-            }, 500); // 0.5초 지연
+            }, 500);
         }
     }
 
