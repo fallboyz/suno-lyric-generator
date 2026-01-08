@@ -25,10 +25,10 @@ body {
     background-attachment: fixed;
     color: var(--text-main);
     line-height: 1.6;
-    height: 100vh;
+    height: 100vh !important;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: hidden !important;
     /* Main window doesn't scroll, content does */
 }
 
@@ -147,10 +147,11 @@ h1 {
     flex: 1;
     width: 100%;
     max-width: 1600px;
+    height: 100% !important;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: hidden !important;
     margin: 0 auto;
 }
 
@@ -158,25 +159,28 @@ h1 {
     display: grid;
     grid-template-columns: minmax(500px, 950px) 1fr;
     grid-template-rows: 1fr;
-    /* Force single row to fill height */
     gap: 1.5rem;
-    height: 100%;
+    height: 100% !important;
     align-items: stretch;
+    min-height: 0;
 }
 
 .editor-section {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    height: 100%;
+    height: 100% !important;
 }
 
 .sidebar-content {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    height: 100%;
+    height: 100% !important;
     min-height: 0;
+    overflow-y: auto;
+    /* 사이드바 내용 많을 시 스크롤 */
+    padding-right: 5px;
 }
 
 .reference-section {
@@ -661,28 +665,42 @@ h2 {
 
 /* Responsive */
 @media (max-width: 1200px) {
-    .main-grid {
-        grid-template-columns: 1fr;
-        height: auto;
-        overflow: visible;
+    html {
+        height: auto !important;
+        overflow-y: auto !important;
     }
 
     body {
-        height: auto;
-        overflow: visible;
+        height: auto !important;
+        display: block !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 
     .app-container {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .main-grid {
+        grid-template-columns: 1fr;
+        height: auto !important;
         overflow: visible;
+    }
+
+    .editor-section {
+        height: auto !important;
+        overflow: visible !important;
     }
 
     .sidebar-content {
-        height: auto;
-        overflow: visible;
+        height: auto !important;
+        overflow: visible !important;
     }
 
     .ref-container {
-        max-height: 500px;
+        max-height: none !important;
+        overflow: visible !important;
     }
 }
 
@@ -738,7 +756,7 @@ h2 {
 
 /* 중앙 광고 영역 스타일 (AdSense) */
 .main-ad-area {
-    margin: 1.5rem 0 0.5rem 0;
+    margin: 1rem 0 0 0;
     padding: 0;
     display: none;
     /* 기본적으로 숨김 (설정이 있을 때만 표시) */
@@ -747,6 +765,8 @@ h2 {
     overflow: hidden;
     flex-shrink: 0;
     min-height: 90px;
+    max-height: 100px;
+    /* 광고 영역이 너무 커지지 않도록 제한 */
     background: transparent;
     border: none;
     width: 100%;
@@ -754,8 +774,9 @@ h2 {
 
 @media (max-width: 768px) {
     .main-ad-area {
-        margin: 1rem 0 0.5rem 0;
+        margin: 0.5rem 0;
         min-height: 50px;
+        max-height: 100px;
         /* 모바일에서는 높이 축소 */
     }
 }

@@ -53,33 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Modal Logic ---
-    function openConfirmModal(template) {
-        pendingTemplate = template;
-        modalTemplateName.textContent = template.name;
-        confirmModal.classList.add('active');
-    }
-
-    function closeConfirmModal() {
-        confirmModal.classList.remove('active');
-        pendingTemplate = null;
-    }
-
-    modalCancelBtn.addEventListener('click', closeConfirmModal);
-
-    modalConfirmBtn.addEventListener('click', () => {
-        if (pendingTemplate) {
-            lyricEditor.value = pendingTemplate.content;
-            if (pendingTemplate.exclude) {
-                excludeInput.value = pendingTemplate.exclude;
-            }
-            closeConfirmModal();
-        }
-    });
-
-    // Close modal on click outside
-    confirmModal.addEventListener('click', (e) => {
-        if (e.target === confirmModal) closeConfirmModal();
-    });
+    // Removed as per user request to directly apply templates
 
     // --- Helper Functions ---
 
@@ -187,12 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 tplEl.addEventListener('mouseleave', hideTooltip);
 
                 tplEl.addEventListener('click', () => {
-                    if (lyricEditor.value === '') {
-                        lyricEditor.value = tpl.content;
-                        if (tpl.exclude) excludeInput.value = tpl.exclude;
-                    } else {
-                        openConfirmModal(tpl);
-                    }
+                    lyricEditor.value = tpl.content;
+                    if (tpl.exclude) excludeInput.value = tpl.exclude;
                 });
                 grid.appendChild(tplEl);
             });
@@ -269,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ins.style.width = "100%";
                 ins.setAttribute('data-ad-client', ADSENSE_CONFIG.client);
                 ins.setAttribute('data-ad-slot', ADSENSE_CONFIG.slot);
-                ins.setAttribute('data-ad-format', 'auto');
+                ins.setAttribute('data-ad-format', 'horizontal');
                 ins.setAttribute('data-full-width-responsive', 'true');
 
                 container.appendChild(ins);
