@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ins.style.width = "100%";
                 ins.setAttribute('data-ad-client', ADSENSE_CONFIG.client);
                 ins.setAttribute('data-ad-slot', ADSENSE_CONFIG.slot);
-                ins.setAttribute('data-ad-format', 'horizontal');
+                ins.setAttribute('data-ad-format', 'auto');
                 ins.setAttribute('data-full-width-responsive', 'true');
 
                 container.appendChild(ins);

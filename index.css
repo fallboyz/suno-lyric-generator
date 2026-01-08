@@ -25,10 +25,10 @@ body {
     background-attachment: fixed;
     color: var(--text-main);
     line-height: 1.6;
-    height: 100vh !important;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden !important;
+    overflow: hidden;
     /* Main window doesn't scroll, content does */
 }
 
@@ -147,11 +147,11 @@ h1 {
     flex: 1;
     width: 100%;
     max-width: 1600px;
-    height: 100% !important;
+    height: 100%;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    overflow: hidden !important;
+    overflow: hidden;
     margin: 0 auto;
 }
 
@@ -160,7 +160,7 @@ h1 {
     grid-template-columns: minmax(500px, 950px) 1fr;
     grid-template-rows: 1fr;
     gap: 1.5rem;
-    height: 100% !important;
+    height: 100%;
     align-items: stretch;
     min-height: 0;
 }
@@ -169,14 +169,14 @@ h1 {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    height: 100% !important;
+    height: 100%;
 }
 
 .sidebar-content {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    height: 100% !important;
+    height: 100%;
     min-height: 0;
     overflow-y: auto;
     /* 사이드바 내용 많을 시 스크롤 */
@@ -756,7 +756,7 @@ h2 {
 
 /* 중앙 광고 영역 스타일 (AdSense) */
 .main-ad-area {
-    margin: 1rem 0 0 0;
+    margin: 1rem 0;
     padding: 0;
     display: none;
     /* 기본적으로 숨김 (설정이 있을 때만 표시) */
@@ -765,8 +765,6 @@ h2 {
     overflow: hidden;
     flex-shrink: 0;
     min-height: 90px;
-    max-height: 100px;
-    /* 광고 영역이 너무 커지지 않도록 제한 */
     background: transparent;
     border: none;
     width: 100%;
@@ -776,7 +774,6 @@ h2 {
     .main-ad-area {
         margin: 0.5rem 0;
         min-height: 50px;
-        max-height: 100px;
         /* 모바일에서는 높이 축소 */
     }
 }
