@@ -232,6 +232,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 앱 렌더링이 끝난 후 약간의 지연을 두어 자연스럽게 표시
             setTimeout(() => {
+                // 중요: 광고를 요청하기 전에 컨테이너를 먼저 보여야 공간(width)이 잡혀서 에러가 안 남
+                container.style.display = 'block';
+
                 const ins = document.createElement('ins');
                 ins.className = "adsbygoogle";
                 ins.style.display = "block";
@@ -246,18 +249,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     (window.adsbygoogle = window.adsbygoogle || []).push({});
 
-                    // 광고 로드 완료 후 실제로 내용이 채워졌는지 확인 (최대 2초 대기)
+                    // 광고 로드 완료 후 실제로 내용이 채워졌는지 확인 (15초 대기)
                     let checkCount = 0;
                     const checkInterval = setInterval(() => {
                         if (ins.clientHeight > 0) {
-                            container.style.display = 'flex';
+                            // container.style.display = 'flex'; // 이미 위에서 보이게 했으므로 주석 처리
                             clearInterval(checkInterval);
                         }
                         checkCount++;
-                        if (checkCount > 150) { // 15초(100ms * 150)로 대기 시간 연장
+
+                        if (checkCount > 150) { // 15초 경과
                             clearInterval(checkInterval);
-                            // 광고가 로드되지 않더라도 공간을 숨기지 않고 유지하거나, 필요시 숨김 처리
-                            // container.style.display = 'none'; 
+                            // 강제로 공간 표시 (광고 미송출 시에도 자리 확보)
+                            container.style.display = 'flex';
+                            if (container.offsetHeight === 0) {
+                                container.style.minHeight = '250px';
+                                container.style.border = '1px dashed rgba(255,255,255,0.1)'; // 디버깅용 경계선
+                            }
                         }
                     }, 100);
                 } catch (e) {
