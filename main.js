@@ -254,9 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             clearInterval(checkInterval);
                         }
                         checkCount++;
-                        if (checkCount > 20) { // 2초 후에도 높이가 없으면 차단된 것으로 간주
+                        if (checkCount > 150) { // 15초(100ms * 150)로 대기 시간 연장
                             clearInterval(checkInterval);
-                            container.style.display = 'none';
+                            // 광고가 로드되지 않더라도 공간을 숨기지 않고 유지하거나, 필요시 숨김 처리
+                            // container.style.display = 'none'; 
                         }
                     }, 100);
                 } catch (e) {
