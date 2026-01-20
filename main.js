@@ -258,14 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         checkCount++;
 
-                        if (checkCount > 150) { // 15초 경과
+                        if (checkCount > 20) { // 2초 경과 (원래대로 2초 체크로 복구)
                             clearInterval(checkInterval);
-                            // 강제로 공간 표시 (광고 미송출 시에도 자리 확보)
-                            container.style.display = 'flex';
-                            if (container.offsetHeight === 0) {
-                                container.style.minHeight = '250px';
-                                container.style.border = '1px dashed rgba(255,255,255,0.1)'; // 디버깅용 경계선
-                            }
+                            // 타임아웃 되어도 광고 영역을 숨기지 않음 (구글이 늦게 보낼 수도 있으므로)
                         }
                     }, 100);
                 } catch (e) {
