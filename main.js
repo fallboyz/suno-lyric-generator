@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="info-modal-body" id="info-modal-body"></div>
             <div class="info-modal-tags" id="info-modal-tags"></div>
+            <div class="info-modal-actions" id="info-modal-actions"></div>
         </div>
     `;
     document.body.appendChild(infoModal);
@@ -100,21 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             if (isMobile()) {
-                // Mobile: Show info modal on first tap, apply on second tap
-                let tapped = false;
-                card.addEventListener('click', (e) => {
-                    if (!tapped) {
-                        e.stopPropagation();
-                        showInfoModal(style.name, style.detail, style.tags);
-                        tapped = true;
-                        setTimeout(() => { tapped = false; }, 3000);
-                    } else {
-                        styleInput.value = style.tags;
-                        if (style.exclude) {
-                            excludeInput.value = style.exclude;
-                        }
-                        infoModal.classList.remove('active');
-                    }
+                // Mobile: Show info modal with action button
+                card.addEventListener('click', () => {
+                    showInfoModal(
+                        style.name,
+                        style.detail,
+                        style.tags,
+                        () => {
+                            styleInput.value = style.tags;
+                            if (style.exclude) {
+                                excludeInput.value = style.exclude;
+                            }
+                        },
+                        '스타일 적용'
+                    );
                 });
             } else {
                 // Desktop: Tooltip on hover, apply on click
@@ -157,17 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
 
                     if (isMobile()) {
-                        let tapped = false;
-                        itemEl.addEventListener('click', (e) => {
-                            if (!tapped) {
-                                e.stopPropagation();
-                                showInfoModal(item.tag, item.detail);
-                                tapped = true;
-                                setTimeout(() => { tapped = false; }, 3000);
-                            } else {
-                                insertAtCursor(lyricEditor, item.tag + '\n');
-                                infoModal.classList.remove('active');
-                            }
+                        itemEl.addEventListener('click', () => {
+                            showInfoModal(
+                                item.tag,
+                                item.detail,
+                                null,
+                                () => {
+                                    insertAtCursor(lyricEditor, item.tag + '\n');
+                                },
+                                '가사창에 추가'
+                            );
                         });
                     } else {
                         itemEl.addEventListener('mouseenter', (e) => showTooltip(e, item.tag, item.detail));
@@ -228,18 +227,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 if (isMobile()) {
-                    let tapped = false;
-                    tplEl.addEventListener('click', (e) => {
-                        if (!tapped) {
-                            e.stopPropagation();
-                            showInfoModal(tpl.name, tpl.detail);
-                            tapped = true;
-                            setTimeout(() => { tapped = false; }, 3000);
-                        } else {
-                            lyricEditor.value = tpl.content;
-                            if (tpl.exclude) excludeInput.value = tpl.exclude;
-                            infoModal.classList.remove('active');
-                        }
+                    tplEl.addEventListener('click', () => {
+                        showInfoModal(
+                            tpl.name,
+                            tpl.detail,
+                            null,
+                            () => {
+                                lyricEditor.value = tpl.content;
+                                if (tpl.exclude) excludeInput.value = tpl.exclude;
+                            },
+                            '템플릿 적용'
+                        );
                     });
                 } else {
                     tplEl.addEventListener('mouseenter', (e) => showTooltip(e, tpl.name, tpl.detail));
@@ -284,9 +282,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let tooltipTimer;
 
     // Show info modal (for mobile)
-    function showInfoModal(title, body, tags = null) {
+    function showInfoModal(title, body, tags = null, actionCallback = null, actionLabel = '적용하기') {
         document.getElementById('info-modal-title').textContent = title;
         document.getElementById('info-modal-body').textContent = body || '설명이 준비 중입니다.';
+
         const tagsEl = document.getElementById('info-modal-tags');
         if (tags) {
             tagsEl.textContent = tags;
@@ -294,6 +293,21 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             tagsEl.style.display = 'none';
         }
+
+        const actionsEl = document.getElementById('info-modal-actions');
+        actionsEl.innerHTML = '';
+
+        if (actionCallback) {
+            const actionBtn = document.createElement('button');
+            actionBtn.className = 'info-modal-action-btn';
+            actionBtn.textContent = actionLabel;
+            actionBtn.addEventListener('click', () => {
+                actionCallback();
+                infoModal.classList.remove('active');
+            });
+            actionsEl.appendChild(actionBtn);
+        }
+
         infoModal.classList.add('active');
     }
 

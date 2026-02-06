@@ -736,6 +736,38 @@ h2 {
     font-size: 0.85rem;
     color: var(--secondary-accent);
     word-break: break-all;
+    margin-bottom: 1rem;
+}
+
+.info-modal-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.info-modal-action-btn {
+    background: var(--btn-primary-bg);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    max-width: 300px;
+}
+
+.info-modal-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
+    filter: brightness(1.2);
+}
+
+.info-modal-action-btn:active {
+    transform: translateY(0);
 }
 
 /* Responsive */
