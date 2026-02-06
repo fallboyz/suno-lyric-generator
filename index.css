@@ -19,17 +19,21 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+    overflow-y: auto;
+}
+
 body {
     font-family: 'Inter', 'Outfit', -apple-system, sans-serif;
     background: var(--bg-gradient);
     background-attachment: fixed;
     color: var(--text-main);
     line-height: 1.6;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    /* Main window doesn't scroll, content does */
+    overflow-x: hidden;
 }
 
 /* Header */
@@ -144,51 +148,41 @@ h1 {
 
 /* Container */
 .app-container {
-    flex: 1;
+    flex: 1 0 auto;
     width: 100%;
     max-width: 1600px;
-    height: 100%;
     padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
     margin: 0 auto;
 }
 
 .main-grid {
     display: grid;
     grid-template-columns: minmax(500px, 950px) 1fr;
-    grid-template-rows: 1fr;
     gap: 1.5rem;
-    height: 100%;
-    align-items: stretch;
-    min-height: 0;
+    align-items: start;
+}
+
+@media (max-width: 1199px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .editor-section {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    height: 100%;
 }
 
 .sidebar-content {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    height: 100%;
-    min-height: 0;
-    overflow-y: auto;
-    /* 사이드바 내용 많을 시 스크롤 */
-    padding-right: 5px;
 }
 
 .reference-section {
-    flex: 1;
-    /* This will force it to stretch to the bottom of the column */
     display: flex;
     flex-direction: column;
-    min-height: 0;
 }
 
 /* Section Common */
@@ -250,12 +244,13 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-height: 0;
+    min-height: 600px;
 }
 
 #lyric-editor {
     flex: 1;
     width: 100%;
+    min-height: 500px;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
@@ -264,7 +259,7 @@ h2 {
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     line-height: 1.6;
-    resize: none;
+    resize: vertical;
     transition: all 0.3s ease;
 }
 
@@ -454,23 +449,8 @@ h2 {
 }
 
 .reference-section {
-    flex: 1;
-    min-height: 0;
-}
-
-.ref-container {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 0.5rem;
-}
-
-.ref-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.ref-container::-webkit-scrollbar-thumb {
-    background: var(--glass-border);
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes fadeIn {
@@ -663,46 +643,102 @@ h2 {
     font-weight: 600;
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
-    html {
-        height: auto !important;
-        overflow-y: auto !important;
-    }
-
-    body {
-        height: auto !important;
-        display: block !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-    }
-
-    .app-container {
-        height: auto !important;
-        overflow: visible !important;
-    }
-
-    .main-grid {
-        grid-template-columns: 1fr;
-        height: auto !important;
-        overflow: visible;
-    }
-
-    .editor-section {
-        height: auto !important;
-        overflow: visible !important;
-    }
-
-    .sidebar-content {
-        height: auto !important;
-        overflow: visible !important;
-    }
-
-    .ref-container {
-        max-height: none !important;
-        overflow: visible !important;
-    }
+/* Info Modal (for mobile) */
+.info-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 30000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 1rem;
 }
+
+.info-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.info-modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--primary-accent);
+    border-radius: 20px;
+    padding: 1.5rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.info-modal-overlay.active .info-modal-content {
+    transform: scale(1);
+}
+
+.info-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.info-modal-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    color: var(--primary-accent);
+    margin: 0;
+}
+
+.info-modal-close {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.info-modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.info-modal-body {
+    font-size: 1rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.info-modal-tags {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--secondary-accent);
+    word-break: break-all;
+}
+
+/* Responsive */
 
 @media (max-width: 768px) {
     .section-header {
@@ -738,7 +774,7 @@ h2 {
     }
 
     #lyric-editor {
-        height: 350px;
+        min-height: 450px;
     }
 
     .premium-footer {

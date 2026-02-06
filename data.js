@@ -53,7 +53,10 @@ const SUNO_DATA = {
                 { tag: "Stacked Harmonies", desc: "밀도 높은 화음", detail: "화음을 겹겹이 쌓아 풍성하고 웅장한 코러스를 연출합니다." },
                 { tag: "Call and Response", desc: "메기고 받기", detail: "메인 보컬과 코러스가 서로 대화하듯 주고받는 연출입니다." },
                 { tag: "Vibrato", desc: "음의 떨림", detail: "끝음 처리를 섬세하게 떨리도록 유도합니다." },
-                { tag: "Whispered", desc: "속삭이는 보컬", detail: "ASMR 급의 신비롭고 가까운 속삭임을 만듭니다." }
+                { tag: "Whispered", desc: "속삭이는 보컬", detail: "ASMR 급의 신비롭고 가까운 속삭임을 만듭니다." },
+                { tag: "Spoken Word", desc: "말하듯 읽기", detail: "노래가 아닌 시를 낭독하듯 말하는 스타일입니다. 힙합이나 시적 표현에 효과적입니다." },
+                { tag: "Monologue", desc: "독백 스타일", detail: "혼잣말하듯 감정을 담아 이야기하는 연극적 보컬 스타일입니다." },
+                { tag: "Narrative", desc: "이야기 서술", detail: "이야기를 들려주듯 차분하게 서술하는 내레이션 스타일입니다." }
             ]
         },
         {

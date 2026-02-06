@@ -13,10 +13,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let pendingTemplate = null;
 
+    // Mobile detection
+    const isMobile = () => {
+        return window.innerWidth <= 768 ||
+            ('ontouchstart' in window) ||
+            (navigator.maxTouchPoints > 0);
+    };
+
     // Create Tooltip Element
     const tooltip = document.createElement('div');
     tooltip.className = 'custom-tooltip';
     document.body.appendChild(tooltip);
+
+    // Create Info Modal for mobile
+    const infoModal = document.createElement('div');
+    infoModal.className = 'info-modal-overlay';
+    infoModal.innerHTML = `
+        <div class="info-modal-content">
+            <div class="info-modal-header">
+                <h3 id="info-modal-title"></h3>
+                <button class="info-modal-close">&times;</button>
+            </div>
+            <div class="info-modal-body" id="info-modal-body"></div>
+            <div class="info-modal-tags" id="info-modal-tags"></div>
+        </div>
+    `;
+    document.body.appendChild(infoModal);
+
+    // Close modal handlers
+    infoModal.querySelector('.info-modal-close').addEventListener('click', () => {
+        infoModal.classList.remove('active');
+    });
+    infoModal.addEventListener('click', (e) => {
+        if (e.target === infoModal) {
+            infoModal.classList.remove('active');
+        }
+    });
 
     // 1. Initial Render
     renderQuickStyles();
@@ -67,17 +99,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="style-card-desc">${style.desc}</span>
             `;
 
-            card.addEventListener('mouseenter', (e) => showTooltip(e, style.name, style.detail, style.tags));
-            card.addEventListener('mousemove', moveTooltip);
-            card.addEventListener('mouseleave', hideTooltip);
+            if (isMobile()) {
+                // Mobile: Show info modal on first tap, apply on second tap
+                let tapped = false;
+                card.addEventListener('click', (e) => {
+                    if (!tapped) {
+                        e.stopPropagation();
+                        showInfoModal(style.name, style.detail, style.tags);
+                        tapped = true;
+                        setTimeout(() => { tapped = false; }, 3000);
+                    } else {
+                        styleInput.value = style.tags;
+                        if (style.exclude) {
+                            excludeInput.value = style.exclude;
+                        }
+                        infoModal.classList.remove('active');
+                    }
+                });
+            } else {
+                // Desktop: Tooltip on hover, apply on click
+                card.addEventListener('mouseenter', (e) => showTooltip(e, style.name, style.detail, style.tags));
+                card.addEventListener('mousemove', moveTooltip);
+                card.addEventListener('mouseleave', hideTooltip);
 
-            card.addEventListener('click', () => {
-                styleInput.value = style.tags;
-                if (style.exclude) {
-                    excludeInput.value = style.exclude;
-                }
-                // Removed Toast as requested
-            });
+                card.addEventListener('click', () => {
+                    styleInput.value = style.tags;
+                    if (style.exclude) {
+                        excludeInput.value = style.exclude;
+                    }
+                });
+            }
             quickStylesContainer.appendChild(card);
         });
     }
@@ -105,14 +156,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="style-card-desc">${item.desc}</span>
                     `;
 
-                    itemEl.addEventListener('mouseenter', (e) => showTooltip(e, item.tag, item.detail));
-                    itemEl.addEventListener('mousemove', moveTooltip);
-                    itemEl.addEventListener('mouseleave', hideTooltip);
+                    if (isMobile()) {
+                        let tapped = false;
+                        itemEl.addEventListener('click', (e) => {
+                            if (!tapped) {
+                                e.stopPropagation();
+                                showInfoModal(item.tag, item.detail);
+                                tapped = true;
+                                setTimeout(() => { tapped = false; }, 3000);
+                            } else {
+                                insertAtCursor(lyricEditor, item.tag + '\n');
+                                infoModal.classList.remove('active');
+                            }
+                        });
+                    } else {
+                        itemEl.addEventListener('mouseenter', (e) => showTooltip(e, item.tag, item.detail));
+                        itemEl.addEventListener('mousemove', moveTooltip);
+                        itemEl.addEventListener('mouseleave', hideTooltip);
 
-                    itemEl.addEventListener('click', () => {
-                        insertAtCursor(lyricEditor, item.tag + '\n');
-                        // Removed Toast as requested
-                    });
+                        itemEl.addEventListener('click', () => {
+                            insertAtCursor(lyricEditor, item.tag + '\n');
+                        });
+                    }
                     grid.appendChild(itemEl);
                 });
                 group.appendChild(grid);
@@ -134,9 +199,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="style-card-desc">${tip.content}</span>
                 `;
 
-                tipEl.addEventListener('mouseenter', (e) => showTooltip(e, tip.title, tip.detail));
-                tipEl.addEventListener('mousemove', moveTooltip);
-                tipEl.addEventListener('mouseleave', hideTooltip);
+                if (isMobile()) {
+                    tipEl.addEventListener('click', () => {
+                        showInfoModal(tip.title, tip.detail);
+                    });
+                } else {
+                    tipEl.addEventListener('mouseenter', (e) => showTooltip(e, tip.title, tip.detail));
+                    tipEl.addEventListener('mousemove', moveTooltip);
+                    tipEl.addEventListener('mouseleave', hideTooltip);
+                }
 
                 grid.appendChild(tipEl);
             });
@@ -156,14 +227,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="style-card-desc">클릭하여 적용</span>
                 `;
 
-                tplEl.addEventListener('mouseenter', (e) => showTooltip(e, tpl.name, tpl.detail));
-                tplEl.addEventListener('mousemove', moveTooltip);
-                tplEl.addEventListener('mouseleave', hideTooltip);
+                if (isMobile()) {
+                    let tapped = false;
+                    tplEl.addEventListener('click', (e) => {
+                        if (!tapped) {
+                            e.stopPropagation();
+                            showInfoModal(tpl.name, tpl.detail);
+                            tapped = true;
+                            setTimeout(() => { tapped = false; }, 3000);
+                        } else {
+                            lyricEditor.value = tpl.content;
+                            if (tpl.exclude) excludeInput.value = tpl.exclude;
+                            infoModal.classList.remove('active');
+                        }
+                    });
+                } else {
+                    tplEl.addEventListener('mouseenter', (e) => showTooltip(e, tpl.name, tpl.detail));
+                    tplEl.addEventListener('mousemove', moveTooltip);
+                    tplEl.addEventListener('mouseleave', hideTooltip);
 
-                tplEl.addEventListener('click', () => {
-                    lyricEditor.value = tpl.content;
-                    if (tpl.exclude) excludeInput.value = tpl.exclude;
-                });
+                    tplEl.addEventListener('click', () => {
+                        lyricEditor.value = tpl.content;
+                        if (tpl.exclude) excludeInput.value = tpl.exclude;
+                    });
+                }
                 grid.appendChild(tplEl);
             });
             panel.appendChild(grid);
@@ -195,6 +282,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Tooltip Logic ---
     let tooltipTimer;
+
+    // Show info modal (for mobile)
+    function showInfoModal(title, body, tags = null) {
+        document.getElementById('info-modal-title').textContent = title;
+        document.getElementById('info-modal-body').textContent = body || '설명이 준비 중입니다.';
+        const tagsEl = document.getElementById('info-modal-tags');
+        if (tags) {
+            tagsEl.textContent = tags;
+            tagsEl.style.display = 'block';
+        } else {
+            tagsEl.style.display = 'none';
+        }
+        infoModal.classList.add('active');
+    }
+
     function showTooltip(e, title, body, tags = null) {
         clearTimeout(tooltipTimer);
         tooltip.innerHTML = `
