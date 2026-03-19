@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css?v=2">
     <link rel="icon" type="image/png" href="logo.png">
     <!-- AdSense Loader -->
     <script src="ads-config.js"></script>
@@ -46,12 +46,12 @@
     <main class="app-container">
         <div class="main-grid">
             <!-- Left Column: Editor -->
-            <section class="editor-section">
+            <section class="editor-section" data-panel="editor">
                 <div class="section-header">
                     <h2>Lyrical Editor</h2>
                     <div class="verified-notice-bar">
                         <span class="pulse-icon"></span>
-                        글로벌 Suno 커뮤니티의 검증된 태그와 최신 기법들을 총망라하여 구축되었습니다. (기준일: 2026.01)
+                        342개의 Suno 태그 / 12 카테고리 / 글로벌 커뮤니티 검증 (2026.03)
                     </div>
                 </div>
                 <div class="editor-wrapper">
@@ -67,37 +67,58 @@
 
             <!-- Right Column: Tools & Reference -->
             <div class="sidebar-content">
-                <section class="style-section">
-                    <div class="section-header">
+                <!-- Style Builder (Collapsible) -->
+                <section class="style-section" data-panel="style">
+                    <div class="section-header style-toggle-header" id="style-toggle">
                         <h2>Style Builder</h2>
+                        <button class="collapse-btn" aria-label="접기/펼치기">
+                            <span class="collapse-icon"></span>
+                        </button>
                     </div>
-                    <div class="style-input-group">
-                        <div class="input-row">
-                            <div class="input-field">
-                                <label>Style Prompt</label>
-                                <input type="text" id="style-input" placeholder="장르, 무드 등...">
+                    <div class="style-collapsible" id="style-collapsible">
+                        <div class="style-input-group">
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>Style Prompt</label>
+                                    <input type="text" id="style-input" placeholder="장르, 무드 등...">
+                                </div>
+                                <button id="copy-style-btn" class="primary-btn copy-btn">복사</button>
                             </div>
-                            <button id="copy-style-btn" class="primary-btn copy-btn">복사</button>
-                        </div>
-                        <div class="input-row">
-                            <div class="input-field">
-                                <label>Exclude Styles</label>
-                                <input type="text" id="exclude-input" placeholder="제외 필터...">
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>Exclude Styles</label>
+                                    <input type="text" id="exclude-input" placeholder="제외 필터...">
+                                </div>
+                                <button id="copy-exclude-btn" class="primary-btn copy-btn">복사</button>
                             </div>
-                            <button id="copy-exclude-btn" class="primary-btn copy-btn">복사</button>
                         </div>
-                    </div>
-                    <div id="style-tags" class="quick-tags" style="margin-top: 1.5rem;">
-                        <!-- Data driven tags will be here -->
+                        <div id="style-tags" class="quick-tags">
+                            <!-- Quick style cards rendered by JS -->
+                        </div>
                     </div>
                 </section>
 
-                <section class="reference-section">
+                <!-- Reference Section (Tags / Tips / Templates) -->
+                <section class="reference-section" data-panel="tags">
+                    <!-- Search Bar -->
+                    <div class="search-bar-wrapper">
+                        <input type="text" id="tag-search" class="tag-search-input" placeholder="태그 검색...">
+                        <button id="search-clear" class="search-clear-btn" style="display:none;">&times;</button>
+                    </div>
+
+                    <!-- Category Filter Chips -->
+                    <div class="category-chips" id="category-chips">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Tabs (Tags / Tips / Templates) -->
                     <nav class="ref-tabs">
                         <button class="tab-btn active" data-tab="tags">Tags</button>
                         <button class="tab-btn" data-tab="tips">Tips</button>
                         <button class="tab-btn" data-tab="templates">Templates</button>
                     </nav>
+
+                    <!-- Scrollable Content Area -->
                     <div id="ref-content" class="ref-container">
                         <!-- Content will be injected by JavaScript -->
                     </div>
@@ -106,14 +127,32 @@
         </div>
     </main>
 
-    <!-- Removed Modal for direct application -->
-
     <footer class="premium-footer">
-        <p>&copy; 2026 Suno Lyric Generator. Developed by <strong>Coulson</strong>. All rights reserved.</p>
+        <p>&copy; 2026 Suno Lyric Generator. Built by <strong>Coulson</strong>.</p>
     </footer>
 
-    <script src="data.js"></script>
-    <script src="main.js"></script>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" id="mobile-nav">
+        <button class="mobile-nav-btn active" data-panel="editor">
+            <span class="nav-icon">E</span>
+            <span class="nav-label">에디터</span>
+        </button>
+        <button class="mobile-nav-btn" data-panel="style">
+            <span class="nav-icon">S</span>
+            <span class="nav-label">스타일</span>
+        </button>
+        <button class="mobile-nav-btn" data-panel="tags">
+            <span class="nav-icon">T</span>
+            <span class="nav-label">태그</span>
+        </button>
+        <button class="mobile-nav-btn" data-panel="tools">
+            <span class="nav-icon">+</span>
+            <span class="nav-label">도구</span>
+        </button>
+    </nav>
+
+    <script src="data.js?v=2"></script>
+    <script src="main.js?v=2"></script>
 </body>
 
 </html>
