@@ -9,7 +9,10 @@ const SUNO_DATA = {
         { name: "R&B / Neo-Soul", desc: "그루비한 소울", tags: "Neo-soul, smooth R&B, groovy, warm synth pad, vocal fry, intimate", detail: "몽환적인 신스 패드와 그루비한 리듬이 돋보이는 네오 소울입니다.", exclude: "rock, country, techno" },
         { name: "EDM / Future Bass", desc: "축제 에너지 폭발", tags: "Future bass, EDM, euphoric, supersaw, sidechained bass, festival energy", detail: "축제 현장의 폭발적인 에너지와 감성적인 멜로디가 결합된 EDM입니다.", exclude: "acoustic, country, jazz" },
         { name: "Acoustic Folk", desc: "따뜻한 어쿠스틱", tags: "Acoustic folk, warm, singer-songwriter, fingerpicking guitar, intimate vocals", detail: "어쿠스틱 기타와 진솔한 보컬이 어우러진 포크 스타일입니다.", exclude: "electronic, heavy metal, EDM" },
-        { name: "Dark Trap", desc: "어둡고 강렬한 트랩", tags: "Dark trap, 808 bass, aggressive, menacing, hi-hats, distorted", detail: "무거운 808 베이스와 공격적인 하이햇이 특징인 다크 트랩입니다.", exclude: "acoustic, jazz, country, pop" }
+        { name: "Dark Trap", desc: "어둡고 강렬한 트랩", tags: "Dark trap, 808 bass, aggressive, menacing, hi-hats, distorted", detail: "무거운 808 베이스와 공격적인 하이햇이 특징인 다크 트랩입니다.", exclude: "acoustic, jazz, country, pop" },
+        { name: "Cyberpunk Darksynth (v6)", desc: "128 BPM 네온 신스웨이브", tags: "Darksynth, 128 BPM, aggressive sidechain bass, analog Oberheim leads, punchy 80s gated snare, gritty vocoder backing, wide stereo mix, dystopian neon atmosphere", detail: "Suno v6에 최적화된 사이드체인 베이스와 아날로그 리드 중심의 디스토피아 신스웨이브입니다.", exclude: "acoustic, acoustic guitar, organic drums, cheerful" },
+        { name: "Modern Amapiano (v6)", desc: "113 BPM 아프로 딥하우스", tags: "Amapiano, 113 BPM, deep percussive log drum bassline, lush soulful electric piano chords, crisp syncopated shaker, smooth intimate male vocals, afro-house dance groove", detail: "Suno v6의 정밀한 그루브를 살리는 남아공 로그 드럼 기반의 소울풀 아마피아노입니다.", exclude: "rock, metal, distorted guitar, country" },
+        { name: "Intimate Indie Folk (v6)", desc: "88 BPM 초근접 어쿠스틱", tags: "Indie folk, 88 BPM, fingerpicked acoustic guitar, warm upright bass, close-miked breathy female vocals, dry intimate room acoustics, organic tape warmth", detail: "숨소리와 어쿠스틱 질감을 극대화한 v6 스튜디오 마이킹 인디 포크 스타일입니다.", exclude: "electronic, synth, heavy drums, autotune" }
     ],
     tags: [
         {
@@ -38,7 +41,13 @@ const SUNO_DATA = {
                 { tag: "[Final Chorus]", desc: "마지막 후렴", detail: "곡의 끝부분에서 가장 강력하게 터지는 마지막 후렴입니다." },
                 { tag: "[Solo: 12s sax swell]", desc: "색소폰 솔로 (12초)", detail: "12초 동안 서서히 커지는 드라마틱한 색소폰 솔로를 유도합니다." },
                 { tag: "[Break: distorted bass drop]", desc: "디스토션 베이스 드롭", detail: "강렬하게 왜곡된 베이스 드롭이 포함된 비트 브레이크 섹션입니다." },
-                { tag: "[Interlude: melodic piano arpeggio]", desc: "피아노 간주", detail: "멜로디컬한 피아노 아르페지오가 흐르는 아름다운 간주 파트입니다." }
+                { tag: "[Interlude: melodic piano arpeggio]", desc: "피아노 간주", detail: "멜로디컬한 피아노 아르페지오가 흐르는 아름다운 간주 파트입니다." },
+                { tag: "[Breakdown]", desc: "악기 감속/빌드 다운", detail: "악기 편성을 대폭 줄여 긴장감을 모으거나 보컬/베이스만 남기는 구간입니다." },
+                { tag: "[Hard Stop]", desc: "칼정지 마감", detail: "여운 없이 음악과 보컬이 동시에 뚝 끊기며 강렬한 인상을 주는 엔딩입니다." },
+                { tag: "[Key Change]", desc: "전조 / 조바꿈", detail: "마지막 후렴구나 클라이맥스에서 조(Key)를 올려 카타르시스를 연출합니다." },
+                { tag: "[Modulation]", desc: "조성 변화", detail: "분위기를 바꾸기 위해 다른 음계나 모드로 매끄럽게 전환하는 구간입니다." },
+                { tag: "[Full Band Enters]", desc: "풀 밴드 진입", detail: "잔잔한 인트로 후 모든 악기가 일제히 터져 나오는 다이내믹 구간입니다." },
+                { tag: "[Acoustic Breakdown]", desc: "어쿠스틱 감속", detail: "전자음을 빼고 통기타/피아노 등 어쿠스틱 사운드로만 정돈하는 브레이크입니다." }
             ]
         },
         {
@@ -55,7 +64,16 @@ const SUNO_DATA = {
                 { tag: "[Staccato]", desc: "짧게 끊기", detail: "음이나 보컬을 짧고 경쾌하게 끊어서 연출합니다." },
                 { tag: "[Legato]", desc: "부드럽게 잇기", detail: "음과 음 사이를 매끄럽고 유려하게 연결합니다." },
                 { tag: "[A cappella]", desc: "무반주 보컬", detail: "악기를 완전히 빼고 오직 목소리만 강조하는 구간을 만듭니다." },
-                { tag: "[Beatbox]", desc: "비트박스", detail: "보컬이 입으로 비트를 만드는 힙합 연출을 유도합니다." }
+                { tag: "[Beatbox]", desc: "비트박스", detail: "보컬이 입으로 비트를 만드는 힙합 연출을 유도합니다." },
+                { tag: "[Whispered]", desc: "속삭임 지시 (미가창)", detail: "가사 바로 앞/위에 배치하여 해당 소절을 속삭이듯 부르도록 디렉팅합니다." },
+                { tag: "[Belted]", desc: "파워 벨팅 지시 (미가창)", detail: "해당 소절에서 가슴 가득 파워풀하게 고음을 내지르도록 디렉팅합니다." },
+                { tag: "[Chant]", desc: "구호/떼창 지시 (미가창)", detail: "군중이나 보컬이 구호를 외치듯 리드미컬하게 외치는 구간입니다." },
+                { tag: "[Mumble]", desc: "중얼거림 지시 (미가창)", detail: "가사를 웅얼거리듯 몽환적이고 힘없는 딜리버리로 처리합니다." },
+                { tag: "[Screaming]", desc: "스크리밍 지시 (미가창)", detail: "록/메탈 또는 감정의 폭발 구간에서 강렬한 비명을 지르도록 디렉팅합니다." },
+                { tag: "(Backing harmony)", desc: "화음 코러스 (실제가창)", detail: "소괄호는 AI가 가사로 부릅니다! 메인 보컬 뒤로 풍성한 화음을 깔아줍니다." },
+                { tag: "(Echo)", desc: "보컬 메아리 (실제가창)", detail: "소괄호는 AI가 가사로 부릅니다! 앞 구절의 끝말을 메아리처럼 반복합니다." },
+                { tag: "(Ad-lib: Yeah)", desc: "애드리브 추임새 (실제가창)", detail: "소괄호는 AI가 가사로 부릅니다! 보컬 사이사이에 자연스러운 추임새를 넣습니다." },
+                { tag: "(Whisper backing)", desc: "속삭임 화음 (실제가창)", detail: "소괄호는 AI가 가사로 부릅니다! 메인 보컬 아래로 속삭이는 음성을 덧입힙니다." }
             ]
         },
         {
@@ -266,7 +284,8 @@ const SUNO_DATA = {
                         { tag: "J-Pop", desc: "제이팝", detail: "일본 대중음악 스타일입니다." },
                         { tag: "City Pop", desc: "시티 팝", detail: "일본 80년대 도시 감성의 팝 음악입니다." },
                         { tag: "Teen Pop", desc: "틴 팝", detail: "10대 청소년 대상의 밝은 팝 음악입니다." },
-                        { tag: "Bubblegum Pop", desc: "버블검 팝", detail: "달콤하고 경쾌한 팝 음악입니다." }
+                        { tag: "Bubblegum Pop", desc: "버블검 팝", detail: "달콤하고 경쾌한 팝 음악입니다." },
+                        { tag: "Hyperpop", desc: "하이퍼팝", detail: "과장된 오토튠, 극단적 신스, 장난기 넘치고 파괴적인 미래형 팝입니다." }
                     ]
                 },
                 {
@@ -291,7 +310,8 @@ const SUNO_DATA = {
                         { tag: "Southern Rock", desc: "서든 록", detail: "미국 남부 감성의 록 음악입니다." },
                         { tag: "Post-Hardcore", desc: "포스트 하드코어", detail: "하드코어 펑크의 진화된 형태입니다." },
                         { tag: "Emo", desc: "이모", detail: "감정적이고 고백적인 록 음악입니다." },
-                        { tag: "Shoegaze", desc: "슈게이즈", detail: "꿈꾸는 듯한 노이즈 기타의 록 음악입니다." }
+                        { tag: "Shoegaze", desc: "슈게이즈", detail: "꿈꾸는 듯한 노이즈 기타의 록 음악입니다." },
+                        { tag: "Midwest Emo", desc: "미드웨스트 이모", detail: "트윙클 기타 리프와 불규칙한 박자감의 서정적인 인디 록입니다." }
                     ]
                 },
                 {
@@ -302,7 +322,8 @@ const SUNO_DATA = {
                         { tag: "Trap", desc: "트랩", detail: "현대적인 808 기반 힙합/EDM입니다." },
                         { tag: "Atlanta Rap", desc: "애틀랜타 랩", detail: "남부 힙합의 중심지 애틀랜타 스타일입니다." },
                         { tag: "Hardcore Rap", desc: "하드코어 랩", detail: "공격적이고 강렬한 랩 스타일입니다." },
-                        { tag: "Lo-fi Hip Hop", desc: "로파이 힙합", detail: "편안하고 따뜻한 비트의 힙합입니다." }
+                        { tag: "Lo-fi Hip Hop", desc: "로파이 힙합", detail: "편안하고 따뜻한 비트의 힙합입니다." },
+                        { tag: "Drift Phonk", desc: "드리프트 폰크", detail: "묵직한 808 베이스와 카우벨 멜로디, 디스토션이 강조된 레이싱 감성 힙합입니다." }
                     ]
                 },
                 {
@@ -326,7 +347,9 @@ const SUNO_DATA = {
                         { tag: "IDM", desc: "IDM", detail: "인텔리전트 댄스 뮤직, 실험적 전자 음악입니다." },
                         { tag: "Downtempo", desc: "다운템포", detail: "느리고 편안한 전자 음악입니다." },
                         { tag: "Chillstep", desc: "칠스텝", detail: "멜로딕하고 부드러운 덥스텝입니다." },
-                        { tag: "Hardstyle", desc: "하드스타일", detail: "강렬한 킥과 빠른 템포의 하드 댄스입니다." }
+                        { tag: "Hardstyle", desc: "하드스타일", detail: "강렬한 킥과 빠른 템포의 하드 댄스입니다." },
+                        { tag: "Melodic Techno", desc: "멜로딕 테크노", detail: "어둡고 깊은 킥 비트 위에 몽환적인 신스 아르페지오가 흐르는 테크노입니다." },
+                        { tag: "Amapiano", desc: "아마피아노", detail: "남아공발 딥하우스와 재즈, 통통 튀는 로그 드럼(Log drum) 베이스라인이 특징입니다." }
                     ]
                 },
                 {
@@ -397,7 +420,8 @@ const SUNO_DATA = {
                         { tag: "Flamenco", desc: "플라멩코", detail: "스페인 전통의 열정적인 음악입니다." },
                         { tag: "World Music", desc: "월드뮤직", detail: "글로벌 문화를 융합한 음악입니다." },
                         { tag: "Middle Eastern", desc: "중동 음악", detail: "아랍/페르시아 전통 음악입니다." },
-                        { tag: "Indian", desc: "인도 음악", detail: "남아시아 전통 음악입니다." }
+                        { tag: "Indian", desc: "인도 음악", detail: "남아시아 전통 음악입니다." },
+                        { tag: "Afrobeats", desc: "아프로비츠", detail: "경쾌한 서아프리카 폴리리듬과 현대 팝/R&B가 결합된 댄서블한 장르입니다." }
                     ]
                 },
                 {
@@ -464,7 +488,12 @@ const SUNO_DATA = {
                 { tag: "Wide Stereo", desc: "넓은 입체감", detail: "좌우 스피커를 가득 채우는 웅장한 입체 사운드를 유도합니다." },
                 { tag: "High Fidelity", desc: "고음질 추구", detail: "스튜디오에서 녹음한 듯한 깨끗하고 선명한 사운드입니다." },
                 { tag: "Analog Saturation", desc: "따뜻한 질감", detail: "아날로그 장비를 통과한 듯한 따뜻하고 부드러운 왜곡을 줍니다." },
-                { tag: "Tape Hiss", desc: "빈티지 노이즈", detail: "카세트 테이프 특유의 배경 노이즈를 넣어 빈티지함을 더합니다." }
+                { tag: "Tape Hiss", desc: "빈티지 노이즈", detail: "카세트 테이프 특유의 배경 노이즈를 넣어 빈티지함을 더합니다." },
+                { tag: "Close-miked", desc: "초근접 마이킹", detail: "마이크 바로 앞에서 부르듯 숨소리와 보컬 입술 질감을 생생하게 살립니다." },
+                { tag: "Dry intimate room", desc: "드라이 룸 사운드", detail: "인위적인 리버브를 배제하고 바로 옆에서 들려주는 친밀한 사운드를 만듭니다." },
+                { tag: "Sidechain compression", desc: "사이드체인 압축", detail: "킥 드럼에 맞춰 베이스와 패드가 울렁이며 펌핑되는 그루브를 연출합니다." },
+                { tag: "Gated reverb snare", desc: "게이트 리버브 스네어", detail: "80년대 신스팝 특유의 웅장하게 울리다 칼같이 끊어지는 드럼 사운드입니다." },
+                { tag: "Stereo imaging", desc: "와이드 스테레오", detail: "악기별 좌우 패닝 분리도가 뛰어난 입체적인 사운드 스테이지를 구축합니다." }
             ]
         },
         {
@@ -591,6 +620,31 @@ const SUNO_DATA = {
             title: "악기 개수 제한",
             content: "2-4개 악기로 제한하세요.",
             detail: "너무 많은 악기를 지정하면 AI가 혼란스러워합니다. 핵심 2-4개만 명시하는 것이 깔끔합니다."
+        },
+        {
+            title: "v6 디렉터 5단계 공식",
+            content: "프로듀서가 세션에게 지시하듯 작성하세요.",
+            detail: "[장르/서브장르] -> [BPM & 그루브] -> [핵심 악기 2~3개] -> [보컬 톤] -> [믹스/마이크 질감] 순서가 v6의 표준 공식입니다."
+        },
+        {
+            title: "대괄호[ ] vs 소괄호( )",
+            content: "[ ]는 연출 지시어, ( )는 실제 부르는 가사입니다.",
+            detail: "대괄호는 절대 부르지 않는 디렉팅([Whispered], [Guitar Solo]), 소괄호는 무조건 발음하여 노래하는 코러스/추임새((Yeah!), (Echo))입니다."
+        },
+        {
+            title: "v6 슬라이더 세팅",
+            content: "Variety는 반드시 0(Off)으로 두세요.",
+            detail: "Variety를 올리면 Suno가 프롬프트 태그를 임의 변형합니다. Style Influence는 70~75%, Weirdness는 0~20%가 상업적 완성도의 정석입니다."
+        },
+        {
+            title: "이중 강화(Reinforcement)",
+            content: "스타일창과 가사창 대괄호에 동시 명시하세요.",
+            detail: "원하는 악기 솔로나 특수 주법은 Style 프롬프트뿐만 아니라 가사 영역의 섹션 태그([Solo: 1980s Saxophone])에도 함께 넣을 때 적중률이 극대화됩니다."
+        },
+        {
+            title: "부정어는 Exclude 전용",
+            content: "스타일창에 'no-'를 쓰면 역효과가 납니다.",
+            detail: "Suno는 부정어를 키워드로 인식해 오히려 포함시켜 버립니다. 제외하고 싶은 악기나 장르는 반드시 Advanced의 Exclude Styles 칸에 적으세요."
         }
     ],
     templates: [
@@ -641,6 +695,18 @@ const SUNO_DATA = {
             content: "[Intro: fingerpicking acoustic guitar]\n\n[Verse 1: soft | intimate | male vocal]\n바람이 불어오는 언덕 위에 서서\n멀리 보이는 마을의 불빛을 바라보네\n\n[Chorus: warm | harmonies]\n이 길의 끝에서 다시 만나자\n\n[Verse 2]\n\n[Bridge: harmonica solo]\n\n[Outro: gentle strum]",
             exclude: "electronic, EDM, heavy metal, trap",
             detail: "핑거피킹 기타와 하모니카가 어우러진 따뜻한 포크 템플릿입니다."
+        },
+        {
+            name: "v6 모던 신스팝 (Modern Synthpop)",
+            content: "[Intro: 120 BPM, driving analog synths, gated snare]\n\n[Verse 1]\n[whispered]\n네온 불빛이 번지는 차가운 거리\n(스며드는 어둠)\n숨죽인 도시 위로 흩어지는 기억들\n(달아날 수 없어)\n\n[Pre-Chorus: building tension | sidechain bass]\n심장 박동이 점점 빨라져 오고\n\n[Chorus: powerful vocals | full analog synths]\n[Belted]\nWE SHINE IN THE DARK!\n(Shine so bright~)\n더 이상 멈출 수 없는 이 밤의 끝으로!\n(Let it burn!)\n\n[Bridge: Breakdown | vocoder only]\n\n[Guitar Solo: 80s chorus lead]\n\n[Outro: Hard Stop]",
+            exclude: "acoustic guitar, country, banjo, organic folk, slow",
+            detail: "Suno v6의 대괄호 지시어와 소괄호 백킹 화음, 하드스탑 엔딩이 완벽하게 결합된 모던 신스팝 템플릿입니다."
+        },
+        {
+            name: "v6 인티메이트 인디 (Intimate Indie)",
+            content: "[Intro: 88 BPM, fingerpicked acoustic guitar, subtle tape hiss]\n\n[Verse 1]\n[close-miked | dry vocals]\n창문을 두드리는 나지막한 빗소리\n(빗소리...)\n커피 잔에 남아있는 온기처럼\n(아직 남아있어)\n\n[Chorus: warm harmonies | upright bass]\n[soft]\n네가 머물다 간 이 자리에\n(머물다 간 자리에~)\n그리움만 조용히 닻을 내리네\n\n[Bridge: Acoustic Breakdown]\n\n[Outro: acoustic guitar chords fading into complete silence]",
+            exclude: "electronic, autotune, heavy drums, distortion, synth",
+            detail: "초근접 마이킹과 어쿠스틱 브레이크다운, 소괄호 에코 화음이 돋보이는 v6 감성 인디 포크 템플릿입니다."
         }
     ]
 };
