@@ -187,7 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.addEventListener('click', () => {
                     showInfoModal(style.name, style.detail, style.tags, () => {
                         styleInput.value = style.tags;
-                        if (style.exclude) excludeInput.value = style.exclude;
+                        excludeInput.value = style.exclude || '';
+                        showToast('스타일이 적용되었습니다.');
                     }, '스타일 적용');
                 });
             } else {
@@ -196,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.addEventListener('mouseleave', hideTooltip);
                 card.addEventListener('click', () => {
                     styleInput.value = style.tags;
-                    if (style.exclude) excludeInput.value = style.exclude;
+                    excludeInput.value = style.exclude || '';
                     showToast('스타일이 적용되었습니다.');
                 });
             }

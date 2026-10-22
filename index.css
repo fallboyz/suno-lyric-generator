@@ -384,6 +384,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 0;
 }
 
 .style-card:hover {
@@ -397,6 +398,7 @@ section {
     font-weight: 600;
     font-size: 0.8rem;
     color: var(--text-main);
+    word-break: break-word;
 }
 
 .style-card-desc {
@@ -872,6 +874,7 @@ section {
     left: 50%;
     transform: translateX(-50%);
     z-index: 50000;
+    max-width: 92vw;
 }
 
 .toast {
@@ -882,13 +885,15 @@ section {
     padding: 0.7rem 1.5rem;
     border-radius: 50px;
     margin-bottom: 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: block;
     font-size: 0.85rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     animation: slideDownIn 0.25s forwards, slideUpOut 0.25s forwards 2.5s;
     white-space: nowrap;
+    max-width: 92vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 }
 
 @keyframes slideDownIn {
